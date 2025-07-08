@@ -7,6 +7,9 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { AuthProvider, useAuth } from "@/hooks/use-auth";
 import { Navigation } from "@/components/navigation";
 import Dashboard from "@/pages/dashboard";
+import Predictions from "@/pages/predictions";
+import Analytics from "@/pages/analytics";
+import BetHistory from "@/pages/bet-history";
 import Login from "@/pages/login";
 import NotFound from "@/pages/not-found";
 
@@ -23,9 +26,9 @@ function AuthenticatedApp() {
       <main>
         <Switch>
           <Route path="/" component={Dashboard} />
-          <Route path="/predictions" component={Dashboard} />
-          <Route path="/analytics" component={Dashboard} />
-          <Route path="/history" component={Dashboard} />
+          <Route path="/predictions" component={Predictions} />
+          <Route path="/analytics" component={Analytics} />
+          <Route path="/history" component={BetHistory} />
           <Route component={NotFound} />
         </Switch>
       </main>

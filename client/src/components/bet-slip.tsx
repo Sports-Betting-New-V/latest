@@ -61,14 +61,19 @@ export function BetSlip() {
 
   if (isLoading) {
     return (
-      <Card>
+      <Card className="sports-card">
         <CardHeader>
-          <CardTitle>Recent Bets</CardTitle>
+          <CardTitle className="flex items-center space-x-2">
+            <div className="p-2 bg-primary/10 rounded-lg">
+              <span className="text-xl">🎯</span>
+            </div>
+            <span>Recent Bets</span>
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="animate-pulse">
+              <div key={i} className="animate-pulse shimmer">
                 <div className="h-16 bg-muted rounded-lg"></div>
               </div>
             ))}
@@ -80,14 +85,25 @@ export function BetSlip() {
 
   if (recentBets.length === 0) {
     return (
-      <Card>
+      <Card className="sports-card">
         <CardHeader>
-          <CardTitle>Recent Bets</CardTitle>
+          <CardTitle className="flex items-center space-x-2">
+            <div className="p-2 bg-primary/10 rounded-lg">
+              <span className="text-xl">🎯</span>
+            </div>
+            <span>Recent Bets</span>
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-center py-8 text-muted-foreground">
-            <p>No bets placed yet</p>
+            <div className="text-6xl mb-4 floating-animation">🎯</div>
+            <p className="text-lg font-medium mb-2">No bets placed yet</p>
             <p className="text-sm">Start betting to see your history here</p>
+            <div className="mt-4 p-3 bg-primary/5 rounded-lg border border-primary/20">
+              <p className="text-xs text-primary font-medium">
+                💡 Tip: Check out our AI predictions for smart betting opportunities
+              </p>
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -95,9 +111,14 @@ export function BetSlip() {
   }
 
   return (
-    <Card>
+    <Card className="sports-card">
       <CardHeader>
-        <CardTitle>Recent Bets</CardTitle>
+        <CardTitle className="flex items-center space-x-2">
+          <div className="p-2 bg-primary/10 rounded-lg">
+            <span className="text-xl">🎯</span>
+          </div>
+          <span>Recent Bets</span>
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-3">

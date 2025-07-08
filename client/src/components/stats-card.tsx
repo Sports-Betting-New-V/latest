@@ -10,14 +10,14 @@ interface StatsCardProps {
 
 export function StatsCard({ title, value, icon, iconBgColor, valueColor = "text-foreground" }: StatsCardProps) {
   return (
-    <Card>
+    <Card className="stats-card">
       <CardContent className="p-6">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm font-medium text-muted-foreground">{title}</p>
             <p className={`text-2xl font-bold ${valueColor}`}>{value}</p>
           </div>
-          <div className={`p-3 rounded-lg ${iconBgColor}`}>
+          <div className={`p-3 rounded-lg ${iconBgColor} floating-animation`}>
             {icon}
           </div>
         </div>

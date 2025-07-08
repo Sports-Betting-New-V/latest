@@ -26,8 +26,10 @@ export default {
           foreground: "var(--primary-foreground)",
         },
         secondary: {
-          DEFAULT: "var(--secondary)",
           foreground: "var(--secondary-foreground)",
+          DEFAULT: '#6B7280', // adjust as needed
+          80: 'rgba(107, 114, 128, 0.8)',  // or use dynamic with opacity
+          40: 'rgba(107, 114, 128, 0.4)',
         },
         muted: {
           DEFAULT: "var(--muted)",

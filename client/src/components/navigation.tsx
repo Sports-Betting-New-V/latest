@@ -38,10 +38,10 @@ export function Navigation() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-r from-primary to-blue-600">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-r from-primary to-blue-600 neon-glow">
               <ChartLine className="h-6 w-6 text-primary-foreground" />
             </div>
-            <h1 className="text-2xl font-bold">SportsBet Pro</h1>
+            <h1 className="text-2xl font-bold gradient-text">SportsBet Pro</h1>
           </Link>
 
           {/* Desktop Navigation */}

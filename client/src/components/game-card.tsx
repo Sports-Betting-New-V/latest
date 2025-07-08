@@ -21,10 +21,30 @@ const sportIcons: Record<string, string> = {
 };
 
 const sportColors: Record<string, string> = {
-  NBA: "from-orange-500 to-red-500",
-  NFL: "from-green-500 to-blue-500",
-  MLB: "from-blue-500 to-green-500", 
-  NHL: "from-blue-500 to-cyan-500",
+  NBA: "from-orange-500 via-red-500 to-purple-600",
+  NFL: "from-green-500 via-emerald-500 to-teal-600",
+  MLB: "from-blue-500 via-indigo-500 to-purple-600", 
+  NHL: "from-gray-500 via-slate-500 to-blue-600",
+};
+
+const getTeamLogo = (team: string) => {
+  const logos: Record<string, string> = {
+    // NBA
+    "Lakers": "LAL",
+    "Warriors": "GSW",
+    "Celtics": "BOS",
+    "Heat": "MIA",
+    // NFL
+    "Chiefs": "KC",
+    "Bills": "BUF",
+    // NHL
+    "Rangers": "NYR",
+    "Bruins": "BOS",
+    // MLB
+    "Yankees": "NYY",
+    "Red Sox": "BOS",
+  };
+  return logos[team] || team.substring(0, 3).toUpperCase();
 };
 
 export function GameCard({ game, featured = false }: GameCardProps) {
@@ -109,18 +129,17 @@ export function GameCard({ game, featured = false }: GameCardProps) {
     // Spread
     if (game.spread) {
       buttons.push(
-        <Button
+        <div
           key="spread-home"
-          variant={selectedBet?.type === "spread" && selectedBet.selection.includes(game.homeTeam) ? "default" : "outline"}
-          className="flex-1 h-auto py-3 px-2"
-          onClick={() => handleBetSelection("spread", `${game.homeTeam} ${game.spread}`, game.spreadOdds || -110)}
+          className={`betting-odds ${selectedBet?.type === "spread" && selectedBet.selection.includes(game.homeTeam) ? "selected" : ""}`}
+          onClick={() => handleBetSelection("spread", `${game.homeTeam} ${game.homeSpread}`, game.homeMoneyline || -110)}
         >
-          <div className="text-center">
-            <p className="text-xs text-muted-foreground uppercase">Spread</p>
-            <p className="font-bold">{game.homeTeam.substring(0, 3)} {game.spread}</p>
-            <p className="text-xs">{formatOdds(game.spreadOdds || -110)}</p>
+          <div className="text-center relative z-10">
+            <p className="text-xs text-muted-foreground uppercase font-semibold">Spread</p>
+            <p className="font-bold text-lg">{getTeamLogo(game.homeTeam)} {game.homeSpread}</p>
+            <p className="text-xs font-medium">{formatOdds(game.homeMoneyline || -110)}</p>
           </div>
-        </Button>
+        </div>
       );
     }
 
@@ -145,18 +164,17 @@ export function GameCard({ game, featured = false }: GameCardProps) {
     // Total
     if (game.total) {
       buttons.push(
-        <Button
+        <div
           key="total-over"
-          variant={selectedBet?.type === "total" && selectedBet.selection.includes("Over") ? "default" : "outline"}
-          className="flex-1 h-auto py-3 px-2"
-          onClick={() => handleBetSelection("total", `Over ${game.total}`, game.totalOdds || -110)}
+          className={`betting-odds ${selectedBet?.type === "total" && selectedBet.selection.includes("Over") ? "selected" : ""}`}
+          onClick={() => handleBetSelection("total", `Over ${game.overUnder}`, game.overOdds || -110)}
         >
-          <div className="text-center">
-            <p className="text-xs text-muted-foreground uppercase">Total</p>
-            <p className="font-bold">O {game.total}</p>
-            <p className="text-xs">{formatOdds(game.totalOdds || -110)}</p>
+          <div className="text-center relative z-10">
+            <p className="text-xs text-muted-foreground uppercase font-semibold">Total</p>
+            <p className="font-bold text-lg">O {game.overUnder}</p>
+            <p className="text-xs font-medium">{formatOdds(game.overOdds || -110)}</p>
           </div>
-        </Button>
+        </div>
       );
     }
 
@@ -164,25 +182,30 @@ export function GameCard({ game, featured = false }: GameCardProps) {
   };
 
   return (
-    <Card className={featured ? "lg:col-span-1" : ""}>
+    <Card className={`sports-card ${featured ? "lg:col-span-1 neon-glow" : ""}`}>
       {featured && (
-        <div className={`relative h-48 bg-gradient-to-r ${sportColors[game.sport]} rounded-t-lg overflow-hidden`}>
-          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div className={`game-card-header relative h-48 bg-gradient-to-r ${sportColors[game.sport]} rounded-t-xl overflow-hidden`}>
+          <div className="absolute inset-0 bg-black bg-opacity-40"></div>
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center text-white">
               <div className="flex items-center justify-center space-x-8 mb-4">
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-black bg-opacity-30 rounded-full flex items-center justify-center mb-2">
-                    <span className="text-3xl">{sportIcons[game.sport]}</span>
+                  <div className="team-logo mb-2 bounce-slow">
+                    <span className="text-sm font-bold">{getTeamLogo(game.awayTeam)}</span>
                   </div>
-                  <p className="font-bold">{game.awayTeam}</p>
+                  <p className="font-bold text-lg">{game.awayTeam}</p>
                 </div>
-                <div className="text-2xl font-bold">VS</div>
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-black bg-opacity-30 rounded-full flex items-center justify-center mb-2">
-                    <span className="text-3xl">{sportIcons[game.sport]}</span>
+                  <div className="text-2xl font-bold gradient-text animate-pulse">VS</div>
+                  <div className="sport-icon mt-2">
+                    <span className="text-lg">{sportIcons[game.sport]}</span>
                   </div>
-                  <p className="font-bold">{game.homeTeam}</p>
+                </div>
+                <div className="text-center">
+                  <div className="team-logo mb-2 bounce-slow" style={{ animationDelay: '0.5s' }}>
+                    <span className="text-sm font-bold">{getTeamLogo(game.homeTeam)}</span>
+                  </div>
+                  <p className="font-bold text-lg">{game.homeTeam}</p>
                 </div>
               </div>
               <div className="flex items-center justify-center space-x-2 text-sm opacity-75">
@@ -198,7 +221,9 @@ export function GameCard({ game, featured = false }: GameCardProps) {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             {!featured && (
-              <span className="text-2xl">{sportIcons[game.sport]}</span>
+              <div className="sport-icon">
+                <span className="text-xl">{sportIcons[game.sport]}</span>
+              </div>
             )}
             <div>
               <h3 className="font-semibold">

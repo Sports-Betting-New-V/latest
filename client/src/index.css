@@ -63,6 +63,13 @@
 
   body {
     @apply font-sans antialiased bg-background text-foreground;
+    background-image: 
+      radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(34, 197, 94, 0.06) 0%, transparent 50%),
+      linear-gradient(135deg, rgba(15, 23, 42, 0.02) 0%, rgba(30, 41, 59, 0.02) 100%);
+    background-attachment: fixed;
+    background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%;
   }
 
   .bg-success {
@@ -79,5 +86,326 @@
 
   .text-gold {
     color: hsl(var(--gold));
+  }
+}
+
+@layer components {
+  .sports-card {
+    @apply relative overflow-hidden rounded-xl border bg-card text-card-foreground shadow-lg;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 100%);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      0 2px 8px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+
+  .sports-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+      0 20px 64px rgba(0, 0, 0, 0.15),
+      0 8px 32px rgba(0, 0, 0, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .premium-gradient {
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 4s ease infinite;
+  }
+
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+
+  .hero-gradient {
+    background: linear-gradient(135deg, 
+      rgba(59, 130, 246, 0.9) 0%, 
+      rgba(147, 51, 234, 0.8) 25%,
+      rgba(236, 72, 153, 0.8) 50%,
+      rgba(34, 197, 94, 0.8) 75%,
+      rgba(251, 191, 36, 0.9) 100%);
+    background-size: 400% 400%;
+    animation: heroGradient 8s ease infinite;
+  }
+
+  @keyframes heroGradient {
+    0%, 100% { background-position: 0% 50%; }
+    25% { background-position: 100% 0%; }
+    50% { background-position: 100% 100%; }
+    75% { background-position: 0% 100%; }
+  }
+
+  .neon-glow {
+    box-shadow: 
+      0 0 10px rgba(59, 130, 246, 0.6),
+      0 0 30px rgba(59, 130, 246, 0.4),
+      0 0 60px rgba(59, 130, 246, 0.2),
+      0 0 100px rgba(59, 130, 246, 0.1);
+    animation: neonPulse 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes neonPulse {
+    from {
+      box-shadow: 
+        0 0 10px rgba(59, 130, 246, 0.6),
+        0 0 30px rgba(59, 130, 246, 0.4),
+        0 0 60px rgba(59, 130, 246, 0.2);
+    }
+    to {
+      box-shadow: 
+        0 0 15px rgba(59, 130, 246, 0.8),
+        0 0 45px rgba(59, 130, 246, 0.6),
+        0 0 90px rgba(59, 130, 246, 0.3);
+    }
+  }
+
+  .gold-glow {
+    box-shadow: 
+      0 0 10px rgba(251, 191, 36, 0.6),
+      0 0 30px rgba(251, 191, 36, 0.4),
+      0 0 60px rgba(251, 191, 36, 0.2),
+      0 0 100px rgba(251, 191, 36, 0.1);
+    animation: goldPulse 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes goldPulse {
+    from {
+      box-shadow: 
+        0 0 10px rgba(251, 191, 36, 0.6),
+        0 0 30px rgba(251, 191, 36, 0.4),
+        0 0 60px rgba(251, 191, 36, 0.2);
+    }
+    to {
+      box-shadow: 
+        0 0 15px rgba(251, 191, 36, 0.8),
+        0 0 45px rgba(251, 191, 36, 0.6),
+        0 0 90px rgba(251, 191, 36, 0.3);
+    }
+  }
+
+  .stats-card {
+    @apply bg-card border rounded-lg p-6 shadow-sm;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .stats-card:hover {
+    @apply shadow-lg;
+    transform: translateY(-1px);
+  }
+
+  .betting-odds {
+    @apply bg-gradient-to-br from-gray-500/80 to-gray-500/40 rounded-lg p-4 text-center cursor-pointer transition-all duration-300;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .betting-odds::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+  }
+
+  .betting-odds:hover::before {
+    left: 100%;
+  }
+
+  .betting-odds:hover {
+    @apply bg-gradient-to-br from-primary to-blue-600 text-primary-foreground;
+    transform: scale(1.08) translateY(-2px);
+    box-shadow: 
+      0 8px 32px rgba(59, 130, 246, 0.3),
+      0 2px 8px rgba(59, 130, 246, 0.2);
+  }
+
+  .betting-odds.selected {
+    @apply bg-gradient-to-br from-primary to-blue-600 text-primary-foreground;
+    box-shadow: 
+      0 0 0 3px rgba(59, 130, 246, 0.4),
+      0 8px 32px rgba(59, 130, 246, 0.3);
+    transform: scale(1.05);
+  }
+
+  .team-logo {
+    @apply w-12 h-12 rounded-full bg-gradient-to-br from-white/20 to-white/5 flex items-center justify-center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .sport-icon {
+    @apply w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500/20 to-blue-500/10 flex items-center justify-center;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+  }
+
+  .live-indicator {
+    @apply inline-flex items-center space-x-1 text-xs font-medium;
+    color: #ff4444;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  .shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .floating-animation {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: textGradient 3s ease infinite;
+  }
+
+  @keyframes textGradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .premium-border {
+    border: 2px solid;
+    border-image: linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4, #10b981) 1;
+    border-image-slice: 1;
+  }
+
+  .game-card-header {
+    @apply relative overflow-hidden;
+    background: linear-gradient(135deg, 
+      rgba(59, 130, 246, 0.9) 0%, 
+      rgba(147, 51, 234, 0.8) 50%, 
+      rgba(6, 182, 212, 0.9) 100%);
+  }
+
+  .game-card-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.3;
+  }
+
+  .stats-gradient {
+    background: linear-gradient(135deg, 
+      rgba(34, 197, 94, 0.1) 0%, 
+      rgba(59, 130, 246, 0.1) 50%, 
+      rgba(168, 85, 247, 0.1) 100%);
+  }
+
+  .pulse-ring {
+    animation: pulseRing 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulseRing {
+    0% {
+      transform: scale(0.8);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(2.4);
+      opacity: 0;
+    }
+  }
+
+  .bounce-slow {
+    animation: bounceUpDown 3s ease-in-out infinite;
+  }
+
+  @keyframes bounceUpDown {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .floating-cards {
+    animation: floatCards 6s ease-in-out infinite;
+  }
+
+  @keyframes floatCards {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-10px) rotate(1deg); }
+    66% { transform: translateY(5px) rotate(-0.5deg); }
+  }
+
+  .success {
+    color: hsl(142, 76%, 36%);
+  }
+
+  .success-bg {
+    background-color: hsl(142, 76%, 36%);
+  }
+
+  .success-bg-muted {
+    background-color: hsl(142, 76%, 36%, 0.1);
+  }
+
+  .premium-card {
+    @apply sports-card;
+    background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.15) 0%, 
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(255, 255, 255, 0.1) 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 
+      0 12px 40px rgba(0, 0, 0, 0.15),
+      0 4px 12px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .premium-card:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 
+      0 25px 80px rgba(0, 0, 0, 0.2),
+      0 10px 40px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
   }
 }
